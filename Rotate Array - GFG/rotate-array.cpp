@@ -8,24 +8,22 @@ class Solution{
     public:
     
     //Function to rotate an array by d elements in counter-clockwise direction. 
-    void rotateArr(int arr[], int d, int n){
-        int num=-1, j, temp;
-        for(int i=0;i<__gcd(n,d);i++){
-            j=i;
-            temp = arr[i];
-            
-            while(1){
-                num = (j+d)%n;
-                
-                if(num==i){
-                    break;
-                }
-                
-                arr[j] = arr[num];
-                j=num;
-            }
-            arr[j] = temp;
+    void reverse(int arr[], int s, int e){
+        while(s<e){
+            int temp = arr[s];
+            arr[s] = arr[e];
+            arr[e] = temp;
+            s++;
+            e--;
         }
+    }
+    
+    void rotateArr(int arr[], int d, int n){
+        // code here
+        d=d%n;
+        reverse(arr, 0, d-1);
+        reverse(arr, d, n-1);
+        reverse(arr, 0 , n-1);
     }
 };
 
