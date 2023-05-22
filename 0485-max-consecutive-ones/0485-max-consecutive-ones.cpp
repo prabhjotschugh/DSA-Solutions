@@ -4,7 +4,6 @@ public:
         int i=0, j=0, len=0, zero=0;
         int n=nums.size();
         
-        vector<int> map(2, 0);
         while(j < n){
             if(nums[j++] == 0){
                 zero++;
