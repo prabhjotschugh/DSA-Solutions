@@ -3,7 +3,6 @@ public:
     bool isVowel(char ch){
         return ch=='a' || ch=='e' || ch=='i' || ch=='o' || ch=='u';
     }
-    
     int maxVowels(string s, int k) {
         int i=0;
         int j=0;
@@ -19,15 +18,15 @@ public:
             if(j-i+1 < k){
                 j++;
             }
-            
             else if(j-i+1 == k){
                 maxi = max(maxi, counter);
+                
                 if(isVowel(s[i])){
                     counter--;
                 }
                 i++;
                 j++;
-            }           
+            }
         }
         return maxi;
     }
