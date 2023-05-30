@@ -7,23 +7,20 @@ using namespace std;
 
 // } Driver Code Ends
 //User function template for C++
-#include<unordered_map>
+
 class Solution {
   public:
     //Function to find two repeated elements.
-    vector<int> twoRepeated (int arr[], int n) {
+    vector<int> twoRepeated (int arr[], int N) {
         // Your code here
-        unordered_map<int, int> umap;
         vector<int> ans;
-        int counter=0;
-        for(int i=0;i<n+2;i++){
-            umap[arr[i]]++;
-            
-            if(umap[arr[i]] == 2){
-                ans.push_back(arr[i]);
-                counter++;
+        
+        for(int i=0;i<N+2;i++){
+            if(arr[abs(arr[i])] > 0){
+                arr[abs(arr[i])] *= -1;
+            }else{
+                ans.push_back(abs(arr[i]));
             }
-            if(counter==2) break;
         }
         return ans;
     }
