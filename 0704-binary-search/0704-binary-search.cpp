@@ -8,7 +8,7 @@ public:
             if(nums[mid]==target){
                 return mid;
             }
-            else if(target>nums[mid]){
+            else if(nums[mid] < target){
                 l=mid+1;
             }
             else{
