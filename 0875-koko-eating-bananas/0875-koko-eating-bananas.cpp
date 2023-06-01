@@ -5,8 +5,7 @@ public:
         int n = piles.size();
         for(int i=0;i<n;i++){
             int time = ( (piles[i]-1) / speed ) + 1;
-            int ans = ceil(time);
-            timeTaken += ans;
+            timeTaken += time;
             
             if(timeTaken > hour){
                 return false;
