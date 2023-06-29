@@ -7,14 +7,14 @@ public:
         int  counter=0;
         for(int gap=0;gap<n;gap++){
             for(int i=0,j=gap ; i<n,j<n ; i++,j++){
-                if(gap==0){
-                    dp[i][j] = true;   //diagonal
+                if(gap == 0){
+                    dp[i][j] = 1;
                 }
-                else if(gap == 1){
-                    dp[i][j] = str[i] == str[j];
+                else if(gap == 1 && str[i] == str[j]){
+                    dp[i][j] = 2;
                 }
-                else{
-                    dp[i][j] = (str[i] == str[j] && dp[i+1][j-1]);
+                else if(str[i] == str[j] && dp[i+1][j-1] > 0){
+                    dp[i][j] = dp[i+1][j-1] + 2;
                 }
                 
                 if(dp[i][j] == true){
