@@ -100,48 +100,29 @@ void printInorder(Node* root)
 class Solution
 {
     public:
-    void width(Node* root, int level, vector<int> &maxMin){
-        if(root == NULL){
-            return;
-        }
-
-        maxMin[0] = max(maxMin[0], level);
-        maxMin[1] = min(maxMin[1], level);
-
-        width(root -> left, level-1, maxMin);
-        width(root -> right, level+1, maxMin);
-    }
-
-    vector<int> verticalOrder(Node* root) {
-
-        vector<int> maxMin(2, 0);
-        width(root, 0, maxMin);
-
-        int width = maxMin[0] - maxMin[1];
-        vector<vector<int>> ans(width+1);
-
-        queue<pair<Node*,int>> q;
-        q.push({root, -maxMin[1]});
-
+    //Function to find the vertical order traversal of Binary Tree.
+    vector<int> verticalOrder(Node *root){
+        vector<int> ans;
+        map<int, vector<int>> mp;
+        queue<pair<Node*, int>> q;
+        q.push({root, 0});
         while(!q.empty()){
-            pair<Node*, int> curr = q.front();
-            ans[curr.second].push_back(curr.first -> data);
+            Node* currNode = q.front().first;
+            int hDist = q.front().second;
+            
             q.pop();
-
-            if(curr.first -> left) {
-                q.push({curr.first -> left, curr.second-1});
-            }
-            if(curr.first -> right) {
-                q.push({curr.first -> right, curr.second+1});
+            
+            mp[hDist].push_back(currNode->data);
+            
+            if(currNode->left)  q.push({currNode->left, hDist-1});
+            if(currNode->right) q.push({currNode->right, hDist+1});
+        }
+        for(auto i:mp){
+            for(auto j:i.second){
+                ans.push_back(j);
             }
         }
-        vector<int> v;
-        for(auto i : ans){
-            for(auto j : i){
-                v.push_back(j);
-            } 
-        }
-        return v;
+        return ans;
     }
 };
 
