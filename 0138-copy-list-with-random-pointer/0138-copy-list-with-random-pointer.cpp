@@ -32,13 +32,15 @@ public:
     Node* copyRandomList(Node* head) {
         Node* cloneHead = NULL;
         Node* cloneTail = NULL;
-        
         Node* temp = head;
+        
+        //1. Clone the linear list
         while(temp){
             insertAtTail(cloneHead, cloneTail, temp->val);
             temp = temp->next;
         }
         
+        //2. Insert clone list in the original list
         Node* originalNode = head;
         Node* cloneNode = cloneHead;
         while(originalNode && cloneNode){
@@ -51,6 +53,7 @@ public:
             cloneNode = temp;
         }
         
+        //3. Clone the random pointers
         temp = head;
         while(temp){
             if(temp->next && temp->random){
@@ -59,6 +62,7 @@ public:
             temp = temp->next->next;
         }
         
+        //4. Revert the changes
         originalNode = head;
         cloneNode = cloneHead;
         while(originalNode && cloneNode){
@@ -70,6 +74,7 @@ public:
             cloneNode = cloneNode->next;
         }
         
+        //5. Return cloneHead;
         return cloneHead;
     }
 };
