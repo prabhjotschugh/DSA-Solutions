@@ -39,24 +39,37 @@ public:
             temp = temp->next;
         }
         
-        unordered_map<Node*, Node*> umap;
         Node* originalNode = head;
         Node* cloneNode = cloneHead;
+        while(originalNode && cloneNode){
+            temp = originalNode->next;
+            originalNode->next = cloneNode;
+            originalNode = temp;
+            
+            temp = cloneNode->next;
+            cloneNode->next = originalNode;
+            cloneNode = temp;
+        }
         
-        while(originalNode){
-            umap[originalNode] = cloneNode;
-            cloneNode = cloneNode->next;
-            originalNode = originalNode->next;
+        temp = head;
+        while(temp){
+            if(temp->next && temp->random){
+                temp->next->random = temp->random->next;
+            }
+            temp = temp->next->next;
         }
         
         originalNode = head;
         cloneNode = cloneHead;
-        
-        while(originalNode){
-            cloneNode->random = umap[originalNode->random];
-            cloneNode = cloneNode->next;
+        while(originalNode && cloneNode){
+            originalNode->next = cloneNode->next;
             originalNode = originalNode->next;
+            
+            if(originalNode)
+                cloneNode->next = originalNode->next;
+            cloneNode = cloneNode->next;
         }
+        
         return cloneHead;
     }
 };
