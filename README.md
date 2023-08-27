@@ -1,3 +1,3 @@
-# LeetCode-Solutions
-This repository contains the solutions of all LeetCode Questions that I have solved. Language used is C++.
+# DSA-Solutions
+This repository comprises elegant C++ solutions for a myriad of LeetCode and GeeksforGeeks questions. These solutions exemplify my commitment and expertise in problem-solving, with each line of code reflecting strategic thinking and algorithmic finesse.
 
