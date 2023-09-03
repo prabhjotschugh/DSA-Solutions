@@ -1,32 +1,28 @@
-#include <queue>
-
 class MyStack {
-private:
-    std::queue<int> q;
-
 public:
+    queue<int> q;
     MyStack() {}
-
+    
     void push(int x) {
         q.push(x);
-        for (int i = 0; i < q.size() - 1; ++i) {
+        for(int i=0;i<q.size()-1;i++){
             q.push(q.front());
             q.pop();
         }
     }
-
+    
     int pop() {
-        int val = q.front();
+        int ans = q.front();
         q.pop();
-        return val;
+        return ans;
     }
-
+    
     int top() {
         return q.front();
     }
-
+    
     bool empty() {
-        return q.empty();
+        return q.size()==0;
     }
 };
 
