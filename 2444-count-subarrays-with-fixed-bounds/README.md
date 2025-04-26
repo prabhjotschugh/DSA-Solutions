@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/count-subarrays-with-fixed-bounds/">2444. Count Subarrays With Fixed Bounds</a></h2><h3>Hard</h3><hr><div><p>You are given an integer array <code>nums</code> and two integers <code>minK</code> and <code>maxK</code>.</p>
+<h2><a href="https://leetcode.com/problems/count-subarrays-with-fixed-bounds/?envType=daily-question&envId=2025-04-26">2444. Count Subarrays With Fixed Bounds</a></h2><h3>Hard</h3><hr><p>You are given an integer array <code>nums</code> and two integers <code>minK</code> and <code>maxK</code>.</p>
 
 <p>A <strong>fixed-bound subarray</strong> of <code>nums</code> is a subarray that satisfies the following conditions:</p>
 
@@ -14,14 +14,16 @@
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
 
-<pre><strong>Input:</strong> nums = [1,3,5,2,7,5], minK = 1, maxK = 5
+<pre>
+<strong>Input:</strong> nums = [1,3,5,2,7,5], minK = 1, maxK = 5
 <strong>Output:</strong> 2
 <strong>Explanation:</strong> The fixed-bound subarrays are [1,3,5] and [1,3,5,2].
 </pre>
 
 <p><strong class="example">Example 2:</strong></p>
 
-<pre><strong>Input:</strong> nums = [1,1,1,1], minK = 1, maxK = 1
+<pre>
+<strong>Input:</strong> nums = [1,1,1,1], minK = 1, maxK = 1
 <strong>Output:</strong> 10
 <strong>Explanation:</strong> Every subarray of nums is a fixed-bound subarray. There are 10 possible subarrays.
 </pre>
@@ -33,4 +35,3 @@
 	<li><code>2 &lt;= nums.length &lt;= 10<sup>5</sup></code></li>
 	<li><code>1 &lt;= nums[i], minK, maxK &lt;= 10<sup>6</sup></code></li>
 </ul>
-</div>
