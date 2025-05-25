@@ -1,17 +1,30 @@
-#define n 26
-
 class Solution {
 public:
     int longestPalindrome(vector<string>& words) {
-        int len = 0, arr[n][n] = { 0 };
-        for (string& s : words) {
-            if (!arr[s.front() - 'a'][s.back() - 'a']) ++arr[s.back() - 'a'][s.front() - 'a'];
-            else len += 4, --arr[s.front() - 'a'][s.back() - 'a'];
+        unordered_map<string,int>m;
+        int n = words.size();
+        bool flag = true;
+        int count = 0;
+        for(string s : words){
+            m[s]++;
         }
-        for (int i = 0; i < n; ++i) if (arr[i][i] & 1) {
-            len += 2;
-            break;
-        }
-        return len;
+        for(int i=0;i<n;i++){
+            if(m[words[i]]){
+                if(words[i][1] == words[i][0]){
+                    count+= (m[words[i]]/2)*4;
+                    if(m[words[i]]%2 == 1) flag = false;
+                }
+                else{
+                    string temp = "";
+                    temp += words[i][1];
+                    temp += words[i][0];
+                    count += min(m[words[i]],m[temp])*4;
+                    m[temp] = 0;
+                }
+                m[words[i]]=0;
+                }
+            }
+        if(!flag) count+=2;
+        return count;
     }
 };
