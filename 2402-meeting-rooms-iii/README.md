@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/meeting-rooms-iii/">2402. Meeting Rooms III</a></h2><h3>Hard</h3><hr><div><p>You are given an integer <code>n</code>. There are <code>n</code> rooms numbered from <code>0</code> to <code>n - 1</code>.</p>
+<h2><a href="https://leetcode.com/problems/meeting-rooms-iii">2402. Meeting Rooms III</a></h2><h3>Hard</h3><hr><p>You are given an integer <code>n</code>. There are <code>n</code> rooms numbered from <code>0</code> to <code>n - 1</code>.</p>
 
 <p>You are given a 2D integer array <code>meetings</code> where <code>meetings[i] = [start<sub>i</sub>, end<sub>i</sub>]</code> means that a meeting will be held during the <strong>half-closed</strong> time interval <code>[start<sub>i</sub>, end<sub>i</sub>)</code>. All the values of <code>start<sub>i</sub></code> are <strong>unique</strong>.</p>
 
@@ -17,7 +17,8 @@
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
 
-<pre><strong>Input:</strong> n = 2, meetings = [[0,10],[1,5],[2,7],[3,4]]
+<pre>
+<strong>Input:</strong> n = 2, meetings = [[0,10],[1,5],[2,7],[3,4]]
 <strong>Output:</strong> 0
 <strong>Explanation:</strong>
 - At time 0, both rooms are not being used. The first meeting starts in room 0.
@@ -31,7 +32,8 @@ Both rooms 0 and 1 held 2 meetings, so we return 0.
 
 <p><strong class="example">Example 2:</strong></p>
 
-<pre><strong>Input:</strong> n = 3, meetings = [[1,20],[2,10],[3,5],[4,9],[6,8]]
+<pre>
+<strong>Input:</strong> n = 3, meetings = [[1,20],[2,10],[3,5],[4,9],[6,8]]
 <strong>Output:</strong> 1
 <strong>Explanation:</strong>
 - At time 1, all three rooms are not being used. The first meeting starts in room 0.
@@ -54,4 +56,3 @@ Room 0 held 1 meeting while rooms 1 and 2 each held 2 meetings, so we return 1.
 	<li><code>0 &lt;= start<sub>i</sub> &lt; end<sub>i</sub> &lt;= 5 * 10<sup>5</sup></code></li>
 	<li>All the values of <code>start<sub>i</sub></code> are <strong>unique</strong>.</li>
 </ul>
-</div>
