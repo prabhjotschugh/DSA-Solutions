@@ -1,52 +1,54 @@
+#include <bits/stdc++.h>
+using namespace std;
+
 class Solution {
 public:
-    int minimumDifference(vector<int>& nums) {
-        int n = nums.size() / 3;
-        priority_queue<int> maxHeap;
+    long long minimumDifference(vector<int>& nums) {
+        int m = nums.size();           // m = 3n
+        int n = m / 3;
+        
+        /* ---------- 1) prefix: keep n smallest so far ---------- */
+        vector<long long> leftMin(m, 0);   // leftMin[i] valid for i >= n-1
+        priority_queue<int> maxHeap;       // biggest on top
         long long sum = 0;
-        vector<long long> prefix(n + 1);
-
-        for (int i = 0; i < n; ++i) {
+        
+        for (int i = 0; i < m; ++i) {
             maxHeap.push(nums[i]);
             sum += nums[i];
-        }
-        prefix[0] = sum;
-
-        for (int i = n; i < 2 * n; ++i) {
-            if (!maxHeap.empty() && nums[i] < maxHeap.top()) {
+            
+            if ((int)maxHeap.size() > n) { // remove largest → keep n smallest
                 sum -= maxHeap.top();
                 maxHeap.pop();
-                maxHeap.push(nums[i]);
-                sum += nums[i];
             }
-            prefix[i - n + 1] = sum;
+            
+            if (i >= n - 1)
+                leftMin[i] = sum;          // current best prefix sum of n elements
         }
-
-        priority_queue<int, vector<int>, greater<int>> minHeap;
+        
+        /* ---------- 2) suffix: keep n largest so far ---------- */
+        vector<long long> rightMax(m, 0);  // rightMax[i] valid for i <= 2n
+        priority_queue<int, vector<int>, greater<int>> minHeap;  // smallest on top
         sum = 0;
-        vector<long long> suffix(n + 1);
-
-        for (int i = 3 * n - 1; i >= 2 * n; --i) {
+        
+        for (int i = m - 1; i >= 0; --i) {
             minHeap.push(nums[i]);
             sum += nums[i];
-        }
-        suffix[n] = sum;
-
-        for (int i = 2 * n - 1; i >= n; --i) {
-            if (!minHeap.empty() && nums[i] > minHeap.top()) {
+            
+            if ((int)minHeap.size() > n) { // remove smallest → keep n largest
                 sum -= minHeap.top();
                 minHeap.pop();
-                minHeap.push(nums[i]);
-                sum += nums[i];
             }
-            suffix[i - n] = sum;
+            
+            if (i <= 2 * n)
+                rightMax[i] = sum;         // current best suffix sum of n elements
         }
-
-        long long ans = LLONG_MAX;
-        for (int i = 0; i <= n; ++i) {
-            ans = min(ans, prefix[i] - suffix[i]);
+        
+        /* ---------- 3) try every border between the two parts ---------- */
+        long long answer = LLONG_MAX;
+        for (int border = n - 1; border <= 2 * n - 1; ++border) {
+            long long diff = leftMin[border] - rightMax[border + 1];
+            answer = min(answer, diff);
         }
-
-        return (int) ans;
+        return answer;
     }
 };
