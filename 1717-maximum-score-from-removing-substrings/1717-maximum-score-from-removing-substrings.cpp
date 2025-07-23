@@ -1,42 +1,69 @@
 class Solution {
 public:
-    void getCount(string str, string sub, int& cnt1, int& cnt2) {
-        char first = sub[0], second = sub[1];
-        int i = 1;
-        while(i < str.length()) {
-            if(i > 0 && str[i-1] == first && str[i] == second) {
-                cnt1++;
-                str.erase(i-1, 2);
-                i--;
-                continue;
-            }
-            i++;
-        }
-
-        i = 1;
-        while(i < str.length()) {
-            if(i > 0 && str[i-1] == second && str[i] == first) {
-                cnt2++;
-                str.erase(i-1, 2);
-                i--;
-                continue;
-            }
-            i++;
-        }
-        return;
+    void clear(stack<pair<char, int>>& st){
+        while(!st.empty()) st.pop();
     }
-    
+
     int maximumGain(string s, int x, int y) {
-        int mxABcnt = 0;
-        int mxBAcnt = 0;
-        int minBAcnt = 0;
-        int minABcnt= 0;
+        int ans = 0;
+        int n = s.length();
+        
+        if (y > x) {
+            stack<pair<char, int>> st;
+            vector<int> vis(n);
 
-        getCount(s, "ab", mxABcnt, minBAcnt);
-        getCount(s, "ba", mxBAcnt, minABcnt);
+            for (int i = 0; i < s.length(); i++) {
+                if (!st.empty() && st.top().first == 'b' && s[i] == 'a') {
+                    vis[i] = 1;
+                    vis[st.top().second] = 1;
+                    st.pop();
+                    ans += y;
+                } else {
+                    st.push({s[i], i});
+                }
+            }
 
-        int operation1 = mxABcnt * x + minBAcnt * y;
-        int operation2 = mxBAcnt * y + minABcnt * x;
-        return max(operation1, operation2);
+            clear(st);
+
+            for (int i = 0; i < n; i++) {
+                if (vis[i] == 1) continue;
+
+                if (!st.empty() && st.top().first == 'a' && s[i] == 'b') {
+                    st.pop();
+                    ans += x;
+                } else {
+                    st.push({s[i], i});
+                }
+            }
+        } else {
+            stack<pair<char, int>> st;
+            vector<int> vis(n);
+
+            for (int i = 0; i < s.length(); i++) {
+                if (!st.empty() && st.top().first == 'a' && s[i] == 'b') {
+                    vis[i] = 1;
+                    vis[st.top().second] = 1;
+                    st.pop();
+                    ans += x;
+                } else {
+                    st.push({s[i], i});
+                }
+            }
+
+            clear(st);
+
+            for (int i = 0; i < n; i++) {
+                if (vis[i] == 1) continue;
+
+                if (!st.empty() && st.top().first == 'b' && s[i] == 'a') {
+                    st.pop();
+                    ans += y;
+                } else {
+                    st.push({s[i], i});
+                }
+            }
+        }
+
+        return ans;
     }
 };
